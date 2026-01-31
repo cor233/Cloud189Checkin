@@ -2,7 +2,7 @@ name: Sync Fork
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # 每6小时自动运行一次
+    - cron: '0 */6 * * *' # 每6小时自动运行一次，可按需修改
   workflow_dispatch: # 允许手动触发
 
 jobs:
@@ -20,11 +20,11 @@ jobs:
           UPSTREAM_BRANCH: main
           TARGET_BRANCH: main
         run: |
-  git config user.name "github-actions[bot]"
-  git config user.email "github-actions[bot]@users.noreply.github.com"
-  git remote add upstream https://github.com/$UPSTREAM_REPO.git
-  git fetch upstream
-  git checkout $TARGET_BRANCH
-  # 关键修改：添加 --allow-unrelated-histories 参数
-  git merge upstream/$UPSTREAM_BRANCH --allow-unrelated-histories || exit 1
-  git push origin $TARGET_BRANCH
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/$UPSTREAM_REPO.git
+          git fetch upstream
+          git checkout $TARGET_BRANCH
+          # 关键：允许合并无关历史，解决首次合并问题
+          git merge upstream/$UPSTREAM_BRANCH --allow-unrelated-histories || exit 1
+          git push origin $TARGET_BRANCH
