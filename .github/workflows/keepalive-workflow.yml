@@ -5,9 +5,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  keepalive:
+  保活:
     runs-on: ubuntu-latest
     permissions:
       actions: write
     steps:
-      - uses: liskin/gh-workflow-keepalive@v1
+      - name: 重新启用工作流
+        uses: liskin/gh-workflow-keepalive@v1
