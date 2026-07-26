@@ -10,5 +10,4 @@ jobs:
     permissions:
       actions: write
     steps:
-      - name: 保持工作流活跃
-        uses: liskin/gh-workflow-keepalive@v1
+      - uses: liskin/gh-workflow-keepalive@v1
